@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 # Script to get specific raw files loaded
 # Pass subject and filetype
@@ -11,7 +11,7 @@ valid_ftypes="Valid ftypes are 'T1w', 'epi'"
 subjloc=$($QC_CODE_ROOT/subj2loc.sh $subj)
 
 # Need to get more stuff for rest sets, which have longer names
-if [[ $subj -ge "101" ]]
+if [[ $subj -ge 101 ]]
 then
     anat_addendum="_ses-01_run-01"
     func_addendum="_ses-01_task-rest_run-01"
@@ -28,7 +28,8 @@ then
 
 elif [[ $ftype = "epi" ]]
 then
-    f=$subjloc/func/sub-${subj}${func_addendum}_bold.nii.gz
+    sid=$(printf "%3.3d" $subj)
+    f=$subjloc/func/sub-${sid}${func_addendum}_bold.nii.gz
 
 else
     echo "$ftype is not a valid ftype"

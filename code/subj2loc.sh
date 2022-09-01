@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 # Translate "task" or "rest" to the correct directory in this environment
 # Usage: pass "task" or "rest" to this script to get back a directory
@@ -12,15 +12,16 @@ then
     echo $valid_ids
     exit 1
 fi
-if [[ $subj -ge "001" && $subj -le "030" ]]
+if [[ $subj -ge 1 && $subj -le 30 ]]
 then
+    subj=$(printf "%3.3d" $subj)
     # Valid task
-    loc=$QC_DATA_ROOT/fmri-open-qc-task/sub-$subj
+    loc=$QC_DATA_ROOT/raw/fmri-open-qc-task/sub-$subj
 
-elif [[ $subj -ge "101" && $subj -le "120" ]]
+elif [[ $subj -ge 101 && $subj -le 120 ]]
 then
     # Valid rest
-    loc=$QC_DATA_ROOT/fmri-open-qc-rest/sub-$subj/ses-01
+    loc=$QC_DATA_ROOT/raw/fmri-open-qc-rest/sub-$subj/ses-01
 
 else
     echo "Invalid ID supplied (${subj})."
