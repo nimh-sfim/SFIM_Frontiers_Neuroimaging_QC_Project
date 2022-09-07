@@ -24,7 +24,8 @@ fi
 
 if [[ $ftype = "T1w" ]]
 then
-    f=$subjloc/anat/sub-${subj}${anat_addendum}_T1w.nii.gz
+    sid=$(printf "%3.3d" $subj)
+    f=$subjloc/anat/sub-${sid}${anat_addendum}_T1w.nii.gz
 
 elif [[ $ftype = "epi" ]]
 then
