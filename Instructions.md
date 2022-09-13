@@ -39,7 +39,13 @@ Name your screenshot `sub-LABEL_[anat/func]_artifact`.
 ## Setup shell environment
 
 There are many scripts set up to facilitate using bash to automate processes.
-These depend on many environment variables.
+To retrieve them, clone the repository via
+
+```
+git clone https://github.com/nimh-sfim/SFIM_Frontiers_Neuroimaging_QC_Project.git
+```
+
+The scripts in this repository depend on many environment variables.
 Consult `code/setup_template.sh` and create a template that matches your needs on your local system.
 The template is set up for an 8-core, 16GB node from biowulf, NIH's HPC system.
 To set up the environment, run
