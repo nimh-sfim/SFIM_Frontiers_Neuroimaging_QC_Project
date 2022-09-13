@@ -25,7 +25,7 @@ afni path/to/image
  
 Example:
 ```
-afni Frontiers_QC_2022/osfstorage-archive/fmri-open-qc-task/sub-001/ses-01/anat/sub-001_T1w.nii.gz
+afni Frontiers_QC_2022/raw/fmri-open-qc-task/sub-001/ses-01/anat/sub-001_T1w.nii.gz
 ```
  
 with the path to your subject’s anatomical or functional image.
