@@ -103,3 +103,18 @@ WARNING: even on biowulf, this takes 3.5 hours.
 On some systems it may take considerably longer.
 Consider batching these jobs.
 Each run will requires about 300 MB of space.
+
+## Run SSwarper
+
+SSwarper is responsible for transforming a skull-stripped brain into MNI space.
+
+To run SSwarper, run
+
+```
+./warperizer.sh $NUMBER
+```
+
+with `$NUMBER` the relevant subject number.
+WARNING: even on biowulf, this takes a considerable number of hours.
+Consider batching these jobs.
+Each run will require about 600MB of space.
