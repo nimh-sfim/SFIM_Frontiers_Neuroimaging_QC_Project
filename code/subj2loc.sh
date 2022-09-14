@@ -12,13 +12,13 @@ then
     echo $valid_ids
     exit 1
 fi
-if [[ $subj -ge 1 && $subj -le 30 ]]
+if [[ $((10#$subj)) -ge 1 && $((10#$subj)) -le 30 ]]
 then
     subj=$(printf "%3.3d" $subj)
     # Valid task
     loc=$QC_DATA_ROOT/raw/fmri-open-qc-task/sub-$subj
 
-elif [[ $subj -ge 101 && $subj -le 120 ]]
+elif [[ $((10#$subj)) -ge 101 && $((10#$subj)) -le 120 ]]
 then
     # Valid rest
     loc=$QC_DATA_ROOT/raw/fmri-open-qc-rest/sub-$subj/ses-01

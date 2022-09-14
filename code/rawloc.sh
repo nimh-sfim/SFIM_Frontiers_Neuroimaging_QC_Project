@@ -11,7 +11,7 @@ valid_ftypes="Valid ftypes are 'T1w', 'epi'"
 subjloc=$($QC_CODE_ROOT/subj2loc.sh $subj)
 
 # Need to get more stuff for rest sets, which have longer names
-if [[ $subj -ge 101 ]]
+if [[ $((10#$subj)) -ge 101 ]]
 then
     anat_addendum="_ses-01_run-01"
     func_addendum="_ses-01_task-rest_run-01"
