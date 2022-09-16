@@ -104,6 +104,16 @@ On some systems it may take considerably longer.
 Consider batching these jobs.
 Each run will requires about 300 MB of space.
 
+## Convert freesurfer format to AFNI/SUMA format
+
+Similar to freesurfer, you'll run a script for a given subject number.
+
+```
+./fs2suma.sh $NUMBER
+```
+
+which should take less than ten minutes per subject.
+
 ## Run SSwarper
 
 SSwarper is responsible for transforming a skull-stripped brain into MNI space.
