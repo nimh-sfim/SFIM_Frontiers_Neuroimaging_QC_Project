@@ -118,3 +118,16 @@ with `$NUMBER` the relevant subject number.
 WARNING: even on biowulf, this takes a considerable number of hours.
 Consider batching these jobs.
 Each run will require about 600MB of space.
+
+## Run afni_proc
+
+afni_proc is responsible for preprocessing and regression.
+
+To run afni_proc for rest runs, run
+
+```
+./ap_rest.sh $NUMBER
+```
+
+with `$NUMBER` the relevant subject number.
+This takes about 45 minutes and 2.7GB of space.

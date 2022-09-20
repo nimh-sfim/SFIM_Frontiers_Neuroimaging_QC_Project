@@ -11,3 +11,4 @@ export QC_META_ROOT=/data/tevesjb/Frontiers_QC_2022/meta
 export OMP_NUM_THREADS=8
 export MNI_TEMPLATE="${QC_CODE_ROOT}/mni_icbm152_t1_tal_nlin_asym_09c.nii"
 export QC_WARPER_ROOT=/data/tevesjb/Frontiers_QC_2022/sswarper
+export QC_AP_ROOT=/data/tevesjb/Frontiers_QC_2022/ap_results
