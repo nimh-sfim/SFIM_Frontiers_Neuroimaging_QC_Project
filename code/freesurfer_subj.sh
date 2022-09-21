@@ -45,7 +45,7 @@ fi
 
 sid=$(printf "%3.3d" $subject)
 
-raw_loc=$($QC_CODE_ROOT/rawloc.sh $sid T1w)
+raw_loc=$($QC_CODE_ROOT/rawloc.sh $subject T1w)
 
 recon-all \
     -subjid "sub-${sid}" \
