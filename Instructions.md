@@ -151,6 +151,15 @@ To run afni_proc for rest runs, run
 with `$NUMBER` the relevant subject number.
 This takes about 45 minutes and 2.7GB of space.
 
+Similarly, for task data, run
+
+```
+./ap_task.sh $NUMBER
+```
+
+with `$NUMBER` the relevant subject number.
+This takes about 50 minutes and 2.7GB of space.
+
 ## Inspect APQC
 
 For afni_proc, we fortunately get a large summary of visuals and tables to easily inspect outputs.
