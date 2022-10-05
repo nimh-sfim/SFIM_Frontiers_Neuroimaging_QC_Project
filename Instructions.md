@@ -129,6 +129,15 @@ WARNING: even on biowulf, this takes a considerable number of hours.
 Consider batching these jobs.
 Each run will require about 600MB of space.
 
+## Inspect SSwarper
+
+For SSwarper, navigate to the subject directory.
+Check that the edges of color roughly match the T1 edges for `QC_AnatQQ_sub*.jpg`.
+This indicates edge alignment between the template brain and the MNI-warped brain.
+Additionally check that the red map covers the T1 brain for `QC_AnatSS.sub*.jpg`.
+This indicates the extent of the T1 that is remaining after skullstripping.
+If there are any noticeable errors, such as a gyrus edge being missed or inconsistent, note the slice in the image and upload the QC image.
+
 ## Run afni_proc
 
 afni_proc is responsible for preprocessing and regression.
@@ -141,3 +150,33 @@ To run afni_proc for rest runs, run
 
 with `$NUMBER` the relevant subject number.
 This takes about 45 minutes and 2.7GB of space.
+
+## Inspect APQC
+
+For afni_proc, we fortunately get a large summary of visuals and tables to easily inspect outputs.
+The QC report can be found as `QC_sub-*/index.html` in each subject's afni_proc output directory.
+Please check all of the following:
+1. Skip ahead to "warns." If there is a severe left-right flip check warning and the edges on the map pictured appear out of alignment, perform a left-right flip on the EPI and re-run afni_proc.py (see "Perform a left-right EPI flip")
+2. Ensure EPI ("Check vols in original space") and anatomical ("Anatomical in original space") look like the original expected (the anatomical should be skullstripped as in SSwarper outputs).
+3. Check EPI to anatomical alignment (ve2a/"Check vol alignment (EPI to anat)"); edges should mostly match.
+4. Check that anatomical to template alignment (va2t/"Check vol alignment (anat to template)") is a very close match. There should be no major differences, and the image should appear identical to the SSwarper output `QC_AnatSS*.jpg`.
+5. Check that the EPI final mask covers most of the brain (in the same report section as the previous step).
+6. Make sure that stat maps (vstat/"Check statistics vols (and effect estimates)") do not match any documented artifacts.
+7. Repeat this inspection for seed-based correlation maps (in the same section as the previous step).
+8. Check that motion and outliers do not exceed 20% (mot/"Check motion and outliers").
+9. Check that tSNR does not drop below the 10th percentile, particularly in the image with the overlay indicating "final TSNR dset."
+10. Check warnings section for any severe warnings. Note that general censor fraction warnings are more liberal in the final QC report than what is outlined here, so censor warnings may not appear.
+For any check failures, please upload the relevant section of the report and mark the dataset as unusable.
+
+## Perform a left-right flip
+
+Left-right flips are surprisingly common between the EPI and anatomical datasets.
+Because we spend much longer on processing the T1 than on the EPI, we will flip the EPI to match the T1 rather than vice versa when AFNI recommends that we do.
+In order to perform the left-right flip, and re-run afni_proc run
+
+```
+$QC_CODE_ROOT/handle_lr_flip.sh $NUMBER
+```
+
+with `$NUMBER` the subject number.
+This script will calculate a left-right flipped EPI dataset and run afni_proc using this data set rather than the original.
