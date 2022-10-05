@@ -72,10 +72,11 @@ afni_proc.py \
     -regress_apply_mot_types demean deriv \
     -regress_est_blur_epits \
     -regress_est_blur_errts \
-    -regress_bandpass 0.01 0.1 \
     -regress_polort 5 \
     -regress_run_clustsim no \
     -regress_stim_times $SUB_CONTROL $SUB_TASK \
+    -regress_stim_types AM1 AM1 \
+    -regress_basis dmBLOCK \
     -regress_stim_labels control task \
     -regress_reml_exec \
     -html_review_style pythonic \
