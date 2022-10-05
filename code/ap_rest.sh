@@ -70,7 +70,6 @@ afni_proc.py \
     -regress_est_blur_epits \
     -regress_est_blur_errts \
     -regress_bandpass 0.01 0.1 \
-    -regress_polort 5 \
     -regress_run_clustsim no \
     -html_review_style pythonic \
     -out_dir $AP_OUT \

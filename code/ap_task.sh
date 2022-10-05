@@ -72,7 +72,6 @@ afni_proc.py \
     -regress_apply_mot_types demean deriv \
     -regress_est_blur_epits \
     -regress_est_blur_errts \
-    -regress_polort 5 \
     -regress_run_clustsim no \
     -regress_stim_times $SUB_CONTROL $SUB_TASK \
     -regress_stim_types AM1 AM1 \
