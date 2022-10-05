@@ -4,11 +4,12 @@
 
 export QC_DATA_ROOT=/data/tevesjb/Frontiers_QC_2022
 export QC_CODE_ROOT=/data/tevesjb/repositories/SFIM_Frontiers_Neuroimaging_QC_Project/code
-export QC_FS_ROOT=/data/tevesjb/Frontiers_QC_2022/freesurfer
+export QC_FS_ROOT="${QC_DATA_ROOT}/freesurfer"
 export SUBJECTS_DIR=$QC_FS_ROOT
 export QC_CPUS=8
-export QC_META_ROOT=/data/tevesjb/Frontiers_QC_2022/meta
+export QC_META_ROOT="${QC_DATA_ROOT}/meta"
 export OMP_NUM_THREADS=8
-export MNI_TEMPLATE="${QC_CODE_ROOT}/mni_icbm152_t1_tal_nlin_asym_09c.nii"
-export QC_WARPER_ROOT=/data/tevesjb/Frontiers_QC_2022/sswarper
-export QC_AP_ROOT=/data/tevesjb/Frontiers_QC_2022/ap_results
+export QC_WARPER_ROOT="${QC_DATA_ROOT}/sswarper"
+export QC_AP_ROOT="${QC_DATA_ROOT}/ap_results"
+export QC_SIMPLIFIED_TIMING="${QC_DATA_ROOT}/raw/simplified_task_fmri_timing"
+export QC_TIMING_ROOT="${QC_DATA_ROOT}/timing_files"
