@@ -184,7 +184,7 @@ Because we spend much longer on processing the T1 than on the EPI, we will flip 
 In order to perform the left-right flip, and re-run afni_proc run
 
 ```
-$QC_CODE_ROOT/handle_lr_flip.sh $NUMBER
+$QC_CODE_ROOT/perform_epi_flip.sh $NUMBER
 ```
 
 with `$NUMBER` the subject number.
