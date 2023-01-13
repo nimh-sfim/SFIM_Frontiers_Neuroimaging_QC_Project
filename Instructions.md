@@ -154,7 +154,7 @@ This takes about 45 minutes and 2.7GB of space.
 Similarly, for task data, run
 
 ```
-./ap_task.sh $NUMBER
+./ap_task_unifize.sh $NUMBER
 ```
 
 with `$NUMBER` the relevant subject number.
