@@ -2,8 +2,8 @@
 
 # Template for setting up QC project environment
 
-export QC_DATA_ROOT=/data/tevesjb/Frontiers_QC_2022
-export QC_CODE_ROOT=/data/tevesjb/repositories/SFIM_Frontiers_Neuroimaging_QC_Project/code
+export QC_DATA_ROOT=/Volumes/NIMH_SFIM/handwekerd/Frontiers_QC_2022
+export QC_CODE_ROOT=/Users/handwerkerd/code/nimh-sfim/SFIM_Frontiers_Neuroimaging_QC_Project/code/
 export QC_FS_ROOT="${QC_DATA_ROOT}/freesurfer"
 export SUBJECTS_DIR=$QC_FS_ROOT
 export QC_CPUS=8

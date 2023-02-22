@@ -72,6 +72,9 @@ To fetch and organize data, run
 ```
 
 which requires an internet connection and the ability to access OSF.
+As scripts are run, make sure the output logs are all saved in one place.
+For programs that generate subject-specific script to run, spot-check
+those script to make sure they were generated as expected.
 
 
 ## Add Slice Times to Niftis
@@ -172,20 +175,15 @@ Please check all of the following:
 5. Check that the EPI final mask covers most of the brain (in the same report section as the previous step).
 6. Make sure that stat maps (vstat/"Check statistics vols (and effect estimates)") do not match any documented artifacts.
 7. Repeat this inspection for seed-based correlation maps (in the same section as the previous step).
-8. Check that motion and outliers do not exceed 20% (mot/"Check motion and outliers").
+8. Check that motion and outliers do not exceed 20% (mot/"Check motion and outliers"). For subjects
+with non-trivial motion under 20% look for systematic issues with motion, such as more motion during
+one task condition versus another or motion artifacts in QC images.
 9. Check that tSNR does not drop below the 10th percentile, particularly in the image with the overlay indicating "final TSNR dset."
 10. Check warnings section for any severe warnings. Note that general censor fraction warnings are more liberal in the final QC report than what is outlined here, so censor warnings may not appear.
 For any check failures, please upload the relevant section of the report and mark the dataset as unusable.
-
-## Perform a left-right flip
-
-Left-right flips are surprisingly common between the EPI and anatomical datasets.
-Because we spend much longer on processing the T1 than on the EPI, we will flip the EPI to match the T1 rather than vice versa when AFNI recommends that we do.
-In order to perform the left-right flip, and re-run afni_proc run
-
-```
-$QC_CODE_ROOT/perform_epi_flip.sh $NUMBER
-```
-
-with `$NUMBER` the subject number.
-This script will calculate a left-right flipped EPI dataset and run afni_proc using this data set rather than the original.
+11. If there are EPI Line variance warnings use instacorr to examine the areas of concern.
+Sometimes other parameters are useful, but start with a bandpass filter of 0.01-1Hz,
+0-3mm smoothing (unless data are already smoothed), and despiking (unless data are already
+despiked). If an artifact is seen on the unprocessed EPI, also look at the processed EPI to
+confirm proper censoring did not remove the artifact. Motion artifacts might disappear after
+censoring, but other scanner artifacts may remain.
