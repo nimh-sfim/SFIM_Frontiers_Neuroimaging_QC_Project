@@ -288,6 +288,68 @@ The flipped axial and sagittal images are:
 
 All mosiac images were cropped in Adobe Illustrator to show a subset of slices.
 
+Generating the cost function plot first used a script to pull the cost functions from each run
+
+```bash
+# Within each subject, the minimum cost value is stored in a file in the row beginning with 'flip_cost_orig'
+
+# Get cost vals from task data
+grep flip_cost_orig ap_results_unifize/sub-???/aea_checkflip_results.txt | awk '{print $3}' > ./cost_func_vals/task_data_correct_anats.txt
+
+# Get cost vals from task data from the original submission when the wrong anatomicals were used
+grep flip_cost_orig ap_results_unifize_WRONGANATOMICALS/sub-???/aea_checkflip_results.txt | awk '{print $3}' > ./cost_func_vals/task_data_wrong_anats.txt
+
+# Get cost vals from rest data
+grep flip_cost_orig ap_results_masked_warper_rest/sub-???/aea_checkflip_results.txt | awk '{print $3}' > ./cost_func_vals/rest_data.txt
+```
+
+Then use the outputted files to generate a plot in python
+
+```python
+from matplotlib import pyplot as plt
+from matplotlib.lines import Line2D
+import os
+import numpy as np
+
+os.chdir('/Volumes/NIMH_SFIM/handwerkerd/Frontiers_QC_2022/')
+fnames = ['rest_data', 'task_data_correct_anats', 'task_data_wrong_anats']
+flabels = ['Rest', 'Task Correct Anatomicals', 'Task Wrong Anatomicals']
+wrong_task_anat_markers=['.','.','.','.','.','.','.','.','.','X',
+                    'X','X','X','X','X','X','X','X','X','X',
+                    'X','X','X','X','X','X','X','X','X','X']
+LR_warning_rest_markers=['X','.','.','.','.','.','.','.','.','.',
+                         '.','.','.','.','X','X','.','.','.','.']
+costvals = [[],[],[]]
+for idx, fname in enumerate(fnames):
+    tmp_file = open(f'cost_func_vals/{fname}.txt', 'r')
+    tmp_content = tmp_file.readlines()
+    costvals[idx] = [float(f) for f in tmp_content]
+    print(costvals[idx])
+
+plt.clf()
+fig = plt.figure(figsize=(15,4))
+for midx in range(len(LR_warning_rest_markers)):
+    plt.plot(costvals[0][midx], 2, marker=LR_warning_rest_markers[midx], markerfacecolor='blue', markeredgecolor='None', markersize=15, linestyle='None')
+
+# plt.plot(costvals[0], 2*np.ones((len(costvals[0]),1)), marker='.', markerfacecolor='blue', markeredgecolor='None', markersize=15, linestyle='None')
+plt.plot(costvals[1], 1.5*np.ones((len(costvals[1]),1)), marker='.', markerfacecolor='green', markeredgecolor='None', markersize=15, linestyle='None')
+for midx in range(len(wrong_task_anat_markers)):
+    plt.plot(costvals[2][midx], 1, marker=wrong_task_anat_markers[midx], markerfacecolor='red', markeredgecolor='None', markersize=15, linestyle='None')
+legend_elements = [Line2D([0], [0], marker='.', markerfacecolor='blue', markeredgecolor='None', markersize=15, linestyle = 'None',label='Rest Data'),
+                   Line2D([0], [0], marker='.', markerfacecolor='green', markeredgecolor='None', markersize=15, linestyle = 'None',label='Task Data, Correct Anatomicals'),
+                   Line2D([0], [0], marker='.', markerfacecolor='red', markeredgecolor='None', markersize=15, linestyle = 'None',label='Task Data, Wrong Anatomicals'),
+                   Line2D([0], [0], marker='.', markerfacecolor='gray', markeredgecolor='None', markersize=15, linestyle = 'None',label='Correct anatomicals'),
+                   Line2D([0], [0], marker='X', markerfacecolor='gray', markeredgecolor='None', markersize=15, linestyle = 'None',label='Wrong anats or flip LR'),
+]
+plt.legend(handles=legend_elements, loc='lower left')
+ax = plt.gca()
+ax.get_yaxis().set_visible(False)
+ax.set_xlabel('Alignment Cost Function Value')
+plt.savefig('./cost_func_vals/Fig7_part_cost_functions.svg', dpi=600, pad_inches=0.5)
+plt.savefig('./cost_func_vals/Fig7_part_cost_functions.eps', dpi=600, pad_inches=0.5)
+plt.savefig('./cost_func_vals/Fig7_part_cost_functions.png', dpi=600, pad_inches=0.5)
+```
+
 ## Figure X
 
 This was a figure that was generated to try to visualize the differences between
