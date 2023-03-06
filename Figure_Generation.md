@@ -78,12 +78,13 @@ underlay_dset=${templ_path}/MNI152_2009_template_SSW.nii.gz
 # line around all N=30 voxels
 olay_dset=sub-0xx.maskthresh.nii.gz
 @chauffeur_afni        \
-  -prefix Figure8_part_TaskData_OverlapMap \
-  -pbar_saveim Figure8_part_TaskData_colorbar.jpg \
+  -prefix Figure3_part_TaskData_OverlapMap \
+  -pbar_saveim Figure3_part_TaskData_colorbar.jpg \
   -func_range 30 \
   -ulay ${underlay_dset} \
   -olay ${olay_dset} \
-  -box_focus_slices AMASK_FOCUS_OLAY \
+  -set_dicom_xyz 1 16 6 \
+  -delta_slices 28 36 31 \
   -cbar Plasma \
   -pbar_posonly \
   -save_ftype SAVE_ALLJPEG \
@@ -101,6 +102,9 @@ olay_dset=sub-0xx.maskthresh.nii.gz
   -label_mode 1 -label_size 4 \
   -do_clean
 
+#  -box_focus_slices AMASK_FOCUS_OLAY \
+
+
 ####
 # Create the image for the Rest data
 # The underlay is the MNI anatomical alignment template
@@ -109,12 +113,13 @@ olay_dset=sub-0xx.maskthresh.nii.gz
 # line around all N=20 voxels
 olay_dset=sub-1xx.maskthresh.nii.gz
 @chauffeur_afni        \
-  -prefix Figure8_part_RestData_OverlapMap \
-  -pbar_saveim Figure8_part_RestData_colorbar.jpg \
+  -prefix Figure3_part_RestData_OverlapMap \
+  -pbar_saveim Figure3_part_RestData_colorbar.jpg \
   -func_range 20 \
   -ulay ${underlay_dset} \
   -olay ${olay_dset} \
-  -box_focus_slices AMASK_FOCUS_OLAY \
+  -set_dicom_xyz 1 16 6 \
+  -delta_slices 28 36 31 \
   -cbar Plasma \
   -pbar_posonly \
   -save_ftype SAVE_ALLJPEG \
@@ -130,7 +135,14 @@ olay_dset=sub-1xx.maskthresh.nii.gz
   -montcolor 'black' \
   -set_xhairs OFF \
   -label_mode 1 -label_size 4 \
-  -do_clean  
+  -do_clean 
+  # -crop_axi_x 23 172 \
+  # -crop_axi_y 17 203 \
+  # -crop_sag_x 17 203 \
+  # -crop_sag_y 17 192 \
+  # -crop_cor_x 23 172 \
+  # -crop_cor_y 17 192 \
+ 
 ```
 
 This generates mosaics for each orientation plane.
